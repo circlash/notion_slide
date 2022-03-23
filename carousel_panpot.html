@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - simple React carousel</title>
-  <!-- link rel="stylesheet" href="./style.css" -->
   <style>
   .carousel {
   position: relative;
@@ -112,48 +106,28 @@
 .carousel_control__next span {
   transform: rotate(-135deg);
 }
-
 .leave {
   transform: translateX(0);
 }
-
 .enter-active.enter-next, .enter-active.enter-prev {
   transform: translateX(0);
   transition: transform 500ms linear;
 }
-
 .enter-next {
   transform: translateX(100%);
 }
-
 .enter-prev {
   transform: translateX(-100%);
   transition: transform 500ms linear;
 }
-
 .leave-active-next {
   transform: translateX(-100%);
   transition: transform 500ms linear;
 }
-
 .leave.leave-active-prev {
   transform: translateX(100%);
   transition: transform 500ms linear;
 }
-
-body {
-  padding: 0;
-  margin: 0;
-  position: relative;
-  overflow-x: hidden;
-  height: 100%;
-  background-image: radial-gradient(ellipse farthest-side at 100% 100%, #b1b1b1 20%, #a79b9f 40%, #d78745 120%);
-}
-
-html, #root {
-  height: 100%;
-}
-
 .app {
   height: 100%;
   display: flex;
@@ -161,15 +135,12 @@ html, #root {
   align-items: center;
 }
   </style>
-
-</head>
-<body>
 <!-- partial:index.partial.html -->
 <div id="root"></div>
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-with-addons.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script><!-- script  src="./script.js"></script -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
 <script>
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -187,7 +158,6 @@ class App extends React.Component {
 
       current: 0,
       isNext: true };
-
 
     this.handlerPrev = this.handlerPrev.bind(this);
     this.handlerNext = this.handlerNext.bind(this);
@@ -249,10 +219,8 @@ class App extends React.Component {
           leave: 'leave',
           leaveActive: isnext ? 'leave-active-next' : 'leave-active-prev' } }, /*#__PURE__*/
 
-
       React.createElement("div", { className: "carousel_slide", key: index }, /*#__PURE__*/
       React.createElement("img", { src: src }))), /*#__PURE__*/
-
 
       React.createElement("button", { className: "carousel_control carousel_control__prev", onClick: this.handlerPrev }, /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/
       React.createElement("button", { className: "carousel_control carousel_control__next", onClick: this.handlerNext }, /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/
@@ -262,12 +230,7 @@ class App extends React.Component {
         items: this.state.items,
         changeSilde: this.goToHistoryClick })))));
 
-
-
-
-
   }}
-
 
 class History extends React.Component {
   constructor(props) {
@@ -284,8 +247,6 @@ class History extends React.Component {
           className: name,
           onClick: () => this.props.changeSilde(current, index) })));
 
-
-
     });
 
     return /*#__PURE__*/(
@@ -293,8 +254,5 @@ class History extends React.Component {
 
   }}
 
-
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById("root"));
 </script>
-</body>
-</html>
