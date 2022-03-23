@@ -1,0 +1,167 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.6/css/all.css'>
+<style>
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+#app {
+  display: flex;
+  height: 100vh;
+}
+#app > div {
+  margin: auto;
+}
+
+body {
+  background: #B24592;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F15F79, #B24592);
+  background: linear-gradient(to right, #F15F79, #B24592);
+}
+body * {
+  font-family: "Roboto";
+}
+
+.carousel__wrapper {
+  border-radius: 5px;
+  box-shadow: 0 1rem 2rem rgba(128, 0, 128, 0.2);
+  margin: 2rem auto;
+  overflow: hidden;
+  width: 400px;
+}
+
+.carousel__controls {
+  display: flex;
+}
+
+.carousel__container {
+  display: flex;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__image {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  top: 0;
+  transform: scale(1.1);
+  transition: all 0.15s ease-out;
+}
+.carousel__image.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.carousel__button {
+  background: #f2f2f2;
+  border: 0;
+  color: purple;
+  cursor: pointer;
+  font-size: 1rem;
+  flex-grow: 1;
+  outline: none;
+  padding: 1rem;
+  transition: all 0.1s ease-out;
+}
+.carousel__button:hover {
+  background: rgba(242, 242, 242, 0.8);
+}
+
+.flavor-text {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  margin: 1rem auto;
+  max-width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  width: 15rem;
+}
+</style>
+
+<div id="app"></div>
+
+<script src='https://fb.me/react-15.1.0.js'></script>
+<script src='https://fb.me/react-dom-15.1.0.min.js'></script>
+<script>
+function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}const images = [
+'https://picsum.photos/400/300/?image=926',
+'https://picsum.photos/400/300/?image=925',
+'https://picsum.photos/400/300/?image=924',
+'https://picsum.photos/400/300/?image=923',
+'https://picsum.photos/400/300/?image=922',
+'https://picsum.photos/400/300/?image=921'];
+
+
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+var hasOwn = {}.hasOwnProperty;
+
+const classNames = (...args) => {
+  var classes = [];
+
+  for (var i = 0; i < args.length; i++) {
+    var arg = args[i];
+    if (!arg) continue;
+
+    var argType = typeof arg;
+
+    if (argType === 'string' || argType === 'number') {
+      classes.push(arg);
+    } else if (Array.isArray(arg) && arg.length) {
+      var inner = classNames.apply(null, arg);
+      if (inner) {
+        classes.push(inner);
+      }
+    } else if (argType === 'object') {
+      for (var key in arg) {
+        if (Object.hasOwnProperty.call(arg, key) && arg[key]) {
+          classes.push(key);
+        }
+      }
+    }
+  }
+
+  return classes.join(' ');
+};
+
+class App extends React.Component {
+  render() {
+    return /*#__PURE__*/(
+      React.createElement("div", null, /*#__PURE__*/
+      React.createElement(Carousel, { images: images }), /*#__PURE__*/
+      React.createElement("p", { className: "flavor-text" }, "React carousel")));
+  }}
+
+class Carousel extends React.Component {
+  constructor() {
+    super();_defineProperty(this, "onKeyUp",
+
+    e => {
+      if (e.keyCode) {
+        if (e.keyCode === 39) {
+          this.showNextSet();
+        } else if (e.keyCode === 37) {
+          this.showPrevSet();
+        }
+      }
+    });_defineProperty(this, "showPrevSet",
+
+    () => {
+      const currentIndex = (this.state.currentIndex - 1 + this.props.images.length) % this.props.images.length;
+      this.setState({ currentIndex });
+    });_defineProperty(this, "showNextSet",
+
+    () => {
+      const currentIndex = (this.state.currentIndex + 1) % this.props.images.length;
+      this.setState({ currentIndex });
+    });this.state = { currentIndex: 0, isTransitioning: false, goingLeft: false };}componentDidMount() {window.addEventListener('keyup', this.onKeyUp);}componentWillUnmount() {window.removeEventListener('keyup', this.onKeyUp);}render() {const { images } = this.props;const { currentIndex, isTransitioning, goingLeft } = this.state;return /*#__PURE__*/React.createElement("div", { className: "carousel__wrapper" }, /*#__PURE__*/React.createElement("div", { className: "carousel__container" }, images.map((img, index) => {let className = 'carousel__image';if (index === currentIndex) className += ' active';return /*#__PURE__*/React.createElement("img", { src: img, className: className, key: `img-${index}` });})), /*#__PURE__*/React.createElement("div", { className: "carousel__controls" }, /*#__PURE__*/React.createElement("button", { className: "carousel__button", onClick: this.showPrevSet }, /*#__PURE__*/React.createElement("i", { className: "fa fa-arrow-left" })), /*#__PURE__*/React.createElement("button", { className: "carousel__button", onClick: this.showNextSet }, /*#__PURE__*/React.createElement("i", { className: "fa fa-arrow-right" }))));}}
+
+ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('app'));
+</script>
